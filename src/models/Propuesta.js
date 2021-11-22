@@ -1,66 +1,79 @@
-const { Sequelize, Model, DataType } = requier("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
+const Categoria = require("./Categoria");
 
 const Propuesta = sequelize.define(
   {
     "propuesta": {
       Id: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
       IdUsuario: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       IdTrabajador: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       UbicacionPropuesta: {
-        type: DataType.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       UbicacionPropuesta: {
-        type: DataType.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       Municipio: {
-        type: DataType.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       Descripcion: {
-        type: DataType.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       FechaAlta: {
-        type: DataType.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       Estatus: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       Categoria: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       FechaFin: {
-        type: DataType.DATE,
+        type: DataTypes.DATE,
         allowNull: true,
       },
       AceptoT: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       AceptoC: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
   },
   {
+    tableName: "propuesta",
     timestamps: false,
   }
 );
+
+Propuesta.hasOne(Categoria,{
+  foreignKey: {
+    name: 'Id',
+    allowNull: true,
+  }
+});
+
+module.exports = Propuesta;
+
+

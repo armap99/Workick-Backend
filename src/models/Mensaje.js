@@ -1,41 +1,42 @@
-const {Sequelize, Model, DataType} = require("sequelize");
+const {Sequelize, Model, DataTypes} = require("sequelize");
 
 const sequelize = requere("../db");
 
 const Mensaje = sequelize.define({
     "mensaje": {
         Id: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         IdCotratista: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         IdTrabajador: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         Contenido: {
-            type:DataType.STRING,
+            type:DataTypes.STRING,
             allowNull: false,
         },
         HoraEnvio: {
-            type:DataType.TIME,//duda
+            type:DataTypes.TIME,//duda
             allowNull: false,
         },
         Enviado: {
-            type:DataType.INTEGER,
+            type:DataTypes.INTEGER,
             allowNull: false,
         },
         IdPropuesta: {
-            type:DataType.INTEGER,
+            type:DataTypes.INTEGER,
             allowNull: false,
         }
 
     },
 },{
+    tableName: "mensaje",
     timestamps:false
 });
 

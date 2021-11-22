@@ -1,4 +1,4 @@
-const {Sequelize, Model,DataType} = requier("sequelize");
+const {Sequelize, Model,DataTypes} = require("sequelize");
 
 const sequelize = require("../db");
 
@@ -6,32 +6,35 @@ const Resena = sequelize.define(
     "resena", 
     {
         Id: {
-            type:DataType.INTEGER,
+            type:DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         IdContratista: {
-            type:DataType.INTEGER,
+            type:DataTypes.INTEGER,
             allowNull: false,
         },
         IdTrabajador: {
-            type:DataType.INTEGER,
+            type:DataTypes.INTEGER,
             allowNull: false,
         },
         Resena: {
-            type: DataType.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         Estrellas: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         Precio: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     },
     {
-        timestamps: false
+        tableName: "resena",
+        timestamps: false,
     }
 );
+
+module.exports = Resena;

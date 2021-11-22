@@ -1,8 +1,11 @@
 const router = require('express').Router();
-const {getAllCounts,addCount,getCoutById} = require('../controllers/cuenta.controller')
+const {getAllAccounts,addAccounts,getAccountsById,getAllWorkerAccounts} = require('../controllers/cuenta.controller')
 
-router.get('/', getAllCounts)
-router.post('/',addCount)
-router.get('/:id',getCoutById)
+router.get('/', getAllAccounts)
+router.post('/',addAccounts)
+router.get('/trabajadores',getAllWorkerAccounts)
+
+
+router.get('/:id',getAccountsById)
 
 module.exports = router

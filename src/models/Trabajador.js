@@ -1,53 +1,70 @@
-const { Sequelize, Model, DataType } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
+const Propuesta = require("./Propuesta");
+const Resena = require("./Resena");
 
 const Trabajador = sequelize.define(
   "trabajador",
   {
     Id: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     IdCuenta: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     DescripcionCorta: {
-      type: DataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     DescripcionLarga: {
-      type: DataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     CalificacionGlobal: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
     CalificacionPrecio: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     Categoria: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     Trabajos: {
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
     TituloTrabajo: {
-      type: DataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
+    tableName: "trabajador",
     timestamps: false,
   }
 );
+
+Cuenta.hasMany(Resena,{
+  foreignKey: {
+    name:'IdTrabajador',
+    allowNull: true,
+  }
+})
+
+Cuenta.hasMany(Propuesta,{
+  foreignKey: {
+    name:'IdTrabajador',
+    allowNull: true,
+  }
+})
 
 module.exports = Trabajador;

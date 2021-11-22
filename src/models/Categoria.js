@@ -1,4 +1,4 @@
-const { Sequelize, Model, DataType } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
 
@@ -7,15 +7,16 @@ const Categoria = sequelize.define(
   {
     Id: {
       primaryKey: true,
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
     },
     Descripcion: {
-      type: DataType.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
+    tableName: "categoria",
     timestamps: false,
   }
 );

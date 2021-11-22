@@ -1,5 +1,8 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = require("../db");
+const Propuesta = require("./Propuesta");
+const Resena = require("./Resena");
+const Trabajador = require("./Trabajador");
 
 const Cuenta = sequelize.define(
   "cuenta",
@@ -39,8 +42,30 @@ const Cuenta = sequelize.define(
     },
   },
   {
+    tableName: "cuenta",
     timestamps: false, //para que no regrese created y udated at
   }
 );
+
+Cuenta.hasOne(Trabajador,{
+  foreignKey: {
+    name: 'IdCuenta',
+    allowNull: true,
+  }
+})
+
+Cuenta.hasMany(Resena,{
+  foreignKey: {
+    name:'IdContratista',
+    allowNull: true,
+  }
+})
+
+Cuenta.hasMany(Propuesta,{
+  foreignKey: {
+    name:'IdUsuario',
+    allowNull: true,
+  }
+})
 
 module.exports = Cuenta;
