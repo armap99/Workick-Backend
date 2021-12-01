@@ -16,6 +16,7 @@ const Cuenta = sequelize.define(
     Correo: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     Contrasena: {
       type: DataTypes.STRING,
