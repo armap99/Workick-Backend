@@ -42,12 +42,12 @@ module.exports.logIn = async function (req, res) {
     const cuenta = await Cuenta.findOne({
       where: { Correo: email, Contrasena: password },
     });
-    if (cuenta !== undefined) {
+    if (cuenta) {
       const token = jwt.sign(
         {
           data: {
             email,
-            id: cuenta.id,
+            id: cuenta.Id,
           },
         },
         "Workick",
@@ -63,6 +63,7 @@ module.exports.logIn = async function (req, res) {
       res.status(400).json({ message: "Datos invalidos" });
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ message: "Server internal error", error: err });
   }
 };
