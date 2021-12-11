@@ -32,7 +32,8 @@ module.exports.addCount = async function (req, res) {
     });
     res.status(201).json({ message: cuenta });
   } catch (err) {
-    res.status(500).json({ message: "algo salio mal" });
+    console.log(err)
+    res.status(400).json({menssage: "El correo ya esta registrado"})
   }
 };
 
