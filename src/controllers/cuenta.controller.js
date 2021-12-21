@@ -2,15 +2,25 @@ const jwt = require("jsonwebtoken");
 const Cuenta = require("../models/Cuenta");
 
 module.exports.getAllCounts = async function (req, res) {
-  const count = await Cuenta.findAll();
-  console.log(count);
-  res.status(200).json({ count });
+  try {
+    console.log(count);
+    res.status(200).json({ count });
+    const count = await Cuenta.findAll();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server internal error", error: err });
+  }
 };
 
 module.exports.getCoutById = async function (req, res) {
-  const { id } = req.params;
-  const count = await Cuenta.findOne({ where: { Id: id } });
-  res.status(200).json({ count });
+  try {
+    const { id } = req.params;
+    const count = await Cuenta.findOne({ where: { Id: id } });
+    res.status(200).json({ count });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server internal error", error: err });
+  }
 };
 
 module.exports.addCount = async function (req, res) {
@@ -32,8 +42,46 @@ module.exports.addCount = async function (req, res) {
     });
     res.status(201).json({ message: cuenta });
   } catch (err) {
-    console.log(err)
-    res.status(400).json({menssage: "El correo ya esta registrado"})
+    console.log(err);
+    res.status(400).json({ menssage: "El correo ya esta registrado" });
+  }
+};
+
+module.exports.updateAccount = async function (req, res) {
+  const { id } = req.params;
+  const { nombre, email, direccion, municipio } = req.body;
+  try {
+    const cuenta = await Cuenta.update(
+      {
+        Nombre: nombre,
+        Correo: email,
+        Direccion: direccion,
+        Municipio: municipio,
+      },
+      { where: { Id: id } }
+    );
+    res
+      .status(200)
+      .json({ menssage: "Se ha actualizado correctamente", Cuenta: cuenta });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server internal error", error: err });
+  }
+};
+
+module.exports.updateAccountToWorker = async function (req, res) {
+  const { id } = req.params;
+  try {
+    const cuenta = await Cuenta.update(
+      {
+        Estatus: 2,
+      },
+      { where: { Id: id } }
+    );
+    res.status(200).json({ message: "Ahora eres trabajador", Cuenta: cuenta });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server internal error", error: err });
   }
 };
 
@@ -54,17 +102,18 @@ module.exports.logIn = async function (req, res) {
         "Workick",
         { expiresIn: "1h" }
       );
-      res.status(200).json({ok: true,
+      res.status(200).json({
+        ok: true,
         token: token,
         id: cuenta.Id,
         nombre: cuenta.Nombre,
         estatus: cuenta.Estatus,
-      })
+      });
     } else {
       res.status(400).json({ message: "Datos invalidos" });
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
   }
 };
