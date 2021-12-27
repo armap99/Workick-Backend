@@ -27,7 +27,7 @@ const Cuenta = sequelize.define(
       allowNull: false,
     },
     Municipio: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     Estatus: {
@@ -35,7 +35,7 @@ const Cuenta = sequelize.define(
       allowNull: false,
     },
     FechaAlta: {
-      type:DataTypes.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
     },
   },

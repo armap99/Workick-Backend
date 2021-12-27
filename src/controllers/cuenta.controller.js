@@ -3,9 +3,9 @@ const Cuenta = require("../models/Cuenta");
 
 module.exports.getAllCounts = async function (req, res) {
   try {
+    const count = await Cuenta.findAll();
     console.log(count);
     res.status(200).json({ count });
-    const count = await Cuenta.findAll();
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });

@@ -1,42 +1,44 @@
-const {Sequelize, Model, DataType} = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = requere("../db");
 
-const Mensaje = sequelize.define({
-    "mensaje": {
-        Id: {
-            type: DataType.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        IdCotratista: {
-            type: DataType.INTEGER,
-            allowNull: false,
-        },
-        IdTrabajador: {
-            type: DataType.INTEGER,
-            allowNull: false,
-        },
-        Contenido: {
-            type:DataType.STRING,
-            allowNull: false,
-        },
-        HoraEnvio: {
-            type:DataType.TIME,//duda
-            allowNull: false,
-        },
-        Enviado: {
-            type:DataType.INTEGER,
-            allowNull: false,
-        },
-        IdPropuesta: {
-            type:DataType.INTEGER,
-            allowNull: false,
-        }
-
+const Mensaje = sequelize.define(
+  {
+    mensaje: {
+      Id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      IdCotratista: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      IdTrabajador: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      Contenido: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      HoraEnvio: {
+        type: DataTypes.TIME, //duda
+        allowNull: false,
+      },
+      Enviado: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      IdPropuesta: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-},{
-    timestamps:false
-});
+  },
+  {
+    timestamps: false,
+  }
+);
 
-module.exports = Mensaje
+module.exports = Mensaje;
