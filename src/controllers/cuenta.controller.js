@@ -24,13 +24,13 @@ module.exports.getCoutById = async function (req, res) {
 };
 
 module.exports.addCount = async function (req, res) {
-  const { name, email, address, city, password } = req.body; //req.param para get
   /* if (email) {
     res.send(email);
   } else {
     res.status(400).json({ message: "Y tu correo we?" });
   } */
   try {
+    const { name, email, address, city, password } = req.body; //req.param para get
     const cuenta = await Cuenta.create({
       Nombre: name,
       Correo: email,
@@ -48,9 +48,9 @@ module.exports.addCount = async function (req, res) {
 };
 
 module.exports.updateAccount = async function (req, res) {
-  const { id } = req.params;
-  const { nombre, email, direccion, municipio } = req.body;
   try {
+    const { id } = req.params;
+    const { nombre, email, direccion, municipio } = req.body;
     const cuenta = await Cuenta.update(
       {
         Nombre: nombre,
@@ -70,8 +70,8 @@ module.exports.updateAccount = async function (req, res) {
 };
 
 module.exports.updateAccountToWorker = async function (req, res) {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const cuenta = await Cuenta.update(
       {
         Estatus: 2,
@@ -86,8 +86,8 @@ module.exports.updateAccountToWorker = async function (req, res) {
 };
 
 module.exports.logIn = async function (req, res) {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body;
     const cuenta = await Cuenta.findOne({
       where: { Correo: email, Contrasena: password },
     });
