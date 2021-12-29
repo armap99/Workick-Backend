@@ -5,8 +5,8 @@ const Propuesta = require("./Propuesta");
 const Resena = require("./Resena");
 
 const Trabajador = sequelize.define(
-  "trabajador",
-  {
+  "trabajador", // el alias de la tabla
+  { 
     Id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -53,14 +53,14 @@ const Trabajador = sequelize.define(
   }
 );
 
-Cuenta.hasMany(Resena,{
+Trabajador.hasMany(Resena,{
   foreignKey: {
     name:'IdTrabajador',
     allowNull: true,
   }
 })
 
-Cuenta.hasMany(Propuesta,{
+Trabajador.hasMany(Propuesta,{
   foreignKey: {
     name:'IdTrabajador',
     allowNull: true,

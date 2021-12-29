@@ -16,9 +16,9 @@ const Categoria = sequelize.define(
     },
   },
   {
-    tableName: "categoria",
+    tableName: 'categoria',
     timestamps: false,
   }
 );
 
-module.exports = Categoria
+module.exports = Categoria;
