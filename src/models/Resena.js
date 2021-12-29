@@ -1,5 +1,4 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
-
 const sequelize = require("../db");
 
 const Resena = sequelize.define(
@@ -38,3 +37,4 @@ const Resena = sequelize.define(
 );
 
 module.exports = Resena;
+

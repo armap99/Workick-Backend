@@ -74,3 +74,4 @@ Propuesta.hasOne(Categoria, {
 });
 
 module.exports = Propuesta;
+
