@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const Categoria = require("../models/Categoria");
 
 module.exports.getAllCotegories = async function (req, res) {

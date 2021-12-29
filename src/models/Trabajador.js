@@ -1,10 +1,12 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
+const Propuesta = require("./Propuesta");
+const Resena = require("./Resena");
 
 const Trabajador = sequelize.define(
-  "trabajador",
-  {
+  "trabajador", // el alias de la tabla
+  { 
     Id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -46,8 +48,23 @@ const Trabajador = sequelize.define(
     },
   },
   {
+    tableName: "trabajador",
     timestamps: false,
   }
 );
+
+Trabajador.hasMany(Resena,{
+  foreignKey: {
+    name:'IdTrabajador',
+    allowNull: true,
+  }
+})
+
+Trabajador.hasMany(Propuesta,{
+  foreignKey: {
+    name:'IdTrabajador',
+    allowNull: true,
+  }
+})
 
 module.exports = Trabajador;

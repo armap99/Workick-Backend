@@ -11,5 +11,6 @@ app.use(cors()); // para poder aceptar peticiones de otros puertos
 
 app.use("/cuenta", require("./routes/cuenta.routes"));
 app.use("/categoria", require("./routes/categoria.routes"));
+app.use("/trabajador", require("./routes/trabajador.routes"));
 
 module.exports = app; //exportar aplicacion

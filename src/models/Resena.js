@@ -1,4 +1,4 @@
-const { Sequelize, Model, DataTypes } = requier("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
 
@@ -32,6 +32,9 @@ const Resena = sequelize.define(
     },
   },
   {
+    tableName: "resena",
     timestamps: false,
   }
 );
+
+module.exports = Resena;
