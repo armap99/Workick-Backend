@@ -1,5 +1,6 @@
 const Trabajador = require("../models/Trabajador");
 const Cuenta = require("../models/Cuenta");
+const Resena = require("../models/Resena")
 
 module.exports.getAllWorkers = async function (req, res) {
   try {
@@ -19,6 +20,9 @@ module.exports.getWorkerInfoByUserId = async function (req, res) {
       include: [
         {
           model: Trabajador,
+        },
+        {
+          model:Resena
         },
       ],
     });
