@@ -4,7 +4,7 @@ module.exports.getClientMessage = async function (req, res) {
   try {
     const { id } = req.params;
     const menssages = await Mensaje.findAll({ where: { IdContratista: id } });
-    res.status(200).json({ menssages });
+    res.status(200).json({ data: menssages });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -15,7 +15,7 @@ module.exports.getWorkerMessage = async function (req, res) {
   try {
     const { id } = req.params;
     const menssages = await Mensaje.findAll({ where: { IdTrabajador: id } });
-    res.status(200).json({ menssages });
+    res.status(200).json({ data: menssages });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -39,7 +39,7 @@ module.exports.addNewMessage = async function (req, res) {
       Enviado: enviado,
       IdPropuesta: idPropuesta,
     });
-    res.status(201).json({ message });
+    res.status(201).json({ data: message });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });

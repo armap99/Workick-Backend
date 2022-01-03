@@ -14,5 +14,6 @@ app.use("/categoria", require("./routes/categoria.routes"));
 app.use("/trabajador", require("./routes/trabajador.routes"));
 app.use("/mensajes", require("./routes/mensaje.routes"));
 app.use("/resena", require("./routes/resena.routes"));
+app.use("/propuesta", require("./routes/propuesta.routes"));
 
 module.exports = app; //exportar aplicacion

@@ -1,11 +1,11 @@
 const Trabajador = require("../models/Trabajador");
 const Cuenta = require("../models/Cuenta");
-const Resena = require("../models/Resena")
+const Resena = require("../models/Resena");
 
 module.exports.getAllWorkers = async function (req, res) {
   try {
     const worker = await Trabajador.findAll();
-    res.status(200).json(worker);
+    res.status(200).json({ data: worker });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -22,11 +22,11 @@ module.exports.getWorkerInfoByUserId = async function (req, res) {
           model: Trabajador,
         },
         {
-          model:Resena
+          model: Resena,
         },
       ],
     });
-    res.status(200).json(worker);
+    res.status(200).json({ data: worker });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -59,7 +59,7 @@ module.exports.addWorkerInformation = async function (req, res) {
       Trabajos: 0,
       TituloTrabajo: tituloTrabajo,
     });
-    res.status(201).json({ message: worker });
+    res.status(201).json({ data: worker });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -87,7 +87,7 @@ module.exports.updateWorkerInfomation = async function (req, res) {
       },
       { where: { Id: id } }
     );
-    res.status(200).json({ message: "Trabajador actualizado", worker });
+    res.status(200).json({ message: "Trabajador actualizado", data: worker });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -105,7 +105,7 @@ module.exports.updateWorkerWorks = async function (req, res) {
       },
       { where: { Id: id } }
     );
-    res.status(200).json({ message: "Trabajador actualizado", worker });
+    res.status(200).json({ message: "Trabajador actualizado", data: worker });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });

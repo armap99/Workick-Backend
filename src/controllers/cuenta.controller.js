@@ -5,7 +5,7 @@ module.exports.getAllCounts = async function (req, res) {
   try {
     const count = await Cuenta.findAll();
     console.log(count);
-    res.status(200).json({ count });
+    res.status(200).json({ data:count });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -16,7 +16,7 @@ module.exports.getCoutById = async function (req, res) {
   try {
     const { id } = req.params;
     const count = await Cuenta.findOne({ where: { Id: id } });
-    res.status(200).json({ count });
+    res.status(200).json({ data: count });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -31,6 +31,9 @@ module.exports.addCount = async function (req, res) {
   } */
   try {
     const { name, email, address, city, password } = req.body; //req.param para get
+    if (name == "" || email == "" || address == "" || password == "") {
+      return res.status(400).json({ message: "Falta de informacion" });
+    }
     const cuenta = await Cuenta.create({
       Nombre: name,
       Correo: email,
@@ -40,7 +43,7 @@ module.exports.addCount = async function (req, res) {
       Estatus: 1,
       FechaAlta: new Date(),
     });
-    res.status(201).json({ message: cuenta });
+    res.status(201).json({ data: cuenta });
   } catch (err) {
     console.log(err);
     res.status(400).json({ menssage: "El correo ya esta registrado" });
@@ -51,6 +54,9 @@ module.exports.updateAccount = async function (req, res) {
   try {
     const { id } = req.params;
     const { nombre, email, direccion, municipio } = req.body;
+    if (nombre == "" || email == "" || direccion == "") {
+      return res.status(400).json({ message: "Falta de informacion" });
+    }
     const cuenta = await Cuenta.update(
       {
         Nombre: nombre,
@@ -62,7 +68,7 @@ module.exports.updateAccount = async function (req, res) {
     );
     res
       .status(200)
-      .json({ menssage: "Se ha actualizado correctamente", Cuenta: cuenta });
+      .json({ menssage: "Se ha actualizado correctamente", data: cuenta });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
@@ -78,7 +84,7 @@ module.exports.updateAccountToWorker = async function (req, res) {
       },
       { where: { Id: id } }
     );
-    res.status(200).json({ message: "Ahora eres trabajador", Cuenta: cuenta });
+    res.status(200).json({ message: "Ahora eres trabajador", data: cuenta });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server internal error", error: err });
