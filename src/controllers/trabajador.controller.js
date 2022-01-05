@@ -4,7 +4,10 @@ const Resena = require("../models/Resena");
 
 module.exports.getAllWorkers = async function (req, res) {
   try {
-    const worker = await Trabajador.findAll();
+    const worker = await Cuenta.findAll({
+      where: { Estatus: 2 },
+      include: [{ model: Trabajador }],
+    });
     res.status(200).json({ data: worker });
   } catch (err) {
     console.log(err);
