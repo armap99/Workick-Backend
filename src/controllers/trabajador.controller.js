@@ -19,10 +19,10 @@ module.exports.getWorkerInfoByUserId = async function (req, res) {
   try {
     const { id } = req.params;
     const worker = await Cuenta.findOne({
-      where: { Id: id },
       include: [
         {
           model: Trabajador,
+          where: { Id: id },
         },
         {
           model: Resena,

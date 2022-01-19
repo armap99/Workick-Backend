@@ -10,7 +10,7 @@ const { isAuthorized } = require("../middlewares/isAuthorized");
 
 router.get("/", getAllWorkers);
 router.post("/", [isAuthorized], addWorkerInformation);
-router.get("/:id", [isAuthorized], getWorkerInfoByUserId);
+router.get("/:id",  getWorkerInfoByUserId);
 router.put("/:id", [isAuthorized], updateWorkerInfomation);
 router.put("/trabajos/:id", [isAuthorized], updateWorkerWorks);
 
