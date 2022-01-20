@@ -23,9 +23,9 @@ module.exports.getWorkerInfoByUserId = async function (req, res) {
         {
           model: Trabajador,
           where: { Id: id },
-        },
-        {
-          model: Resena,
+          include: [{ 
+            model: Resena 
+          }],
         },
       ],
     });
