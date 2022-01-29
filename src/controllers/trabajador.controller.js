@@ -2,6 +2,8 @@ const Trabajador = require("../models/Trabajador");
 const Cuenta = require("../models/Cuenta");
 const Resena = require("../models/Resena");
 
+const { Op } = require("sequelize");
+
 module.exports.getAllWorkers = async function (req, res) {
   try {
     const worker = await Cuenta.findAll({
@@ -14,6 +16,42 @@ module.exports.getAllWorkers = async function (req, res) {
     res.status(500).json({ message: "Server internal error", error: err });
   }
 };
+
+module.exports.getAllWorkersFilter = async function (req,res){
+  try {
+    const {texto} = req.body
+    const workers = await Cuenta.findAll({
+      where: {
+        Estatus: 2
+      },
+      include: [{model: Trabajador, 
+        where: {
+          [Op.or] : [
+            {
+              DescripcionCorta: {
+                [Op.like]: `%${texto}%`
+              }
+            },
+            {
+              DescripcionCorta: {
+                [Op.like]: `%${texto}%`
+              }
+            },
+            {
+              TituloTrabajo: {
+                [Op.like]: `%${texto}%`
+              }
+            },
+          ]
+        },
+      }],
+    })
+    res.status(200).json({data: workers});
+  } catch(err){
+    console.log(err)
+    res.status(500).message({message: "Server internal error", error: err})
+  }
+}
 
 module.exports.getWorkerInfoByUserId = async function (req, res) {
   try {
